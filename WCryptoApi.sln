@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCryptoApi.Infrastructure",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCryptoApi.Business", "WCryptoApi.Business\WCryptoApi.Business.csproj", "{517092BC-8737-40C4-A5AC-09B263AC9D23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCryptoApi.Testing", "WCryptoApi.Testing\WCryptoApi.Testing.csproj", "{1037CFD1-06BF-4FAC-8D07-FD91EC582FD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{517092BC-8737-40C4-A5AC-09B263AC9D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{517092BC-8737-40C4-A5AC-09B263AC9D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{517092BC-8737-40C4-A5AC-09B263AC9D23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1037CFD1-06BF-4FAC-8D07-FD91EC582FD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1037CFD1-06BF-4FAC-8D07-FD91EC582FD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1037CFD1-06BF-4FAC-8D07-FD91EC582FD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1037CFD1-06BF-4FAC-8D07-FD91EC582FD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

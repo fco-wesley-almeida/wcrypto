@@ -6,7 +6,7 @@ namespace WCryptoApi.Infrastructure;
 
 public class WCryptoDb
 {
-    private   string _dbConnectionString;
+    private readonly string _dbConnectionString;
 
     protected WCryptoDb()
     {
@@ -16,7 +16,6 @@ public class WCryptoDb
 
     protected IDbConnection Connect()
     {
-        Console.WriteLine(_dbConnectionString);
         return new MySqlConnection(_dbConnectionString);
     }
 }

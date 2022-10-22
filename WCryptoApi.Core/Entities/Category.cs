@@ -47,7 +47,7 @@ public class Category
     }
     private static void ValidateDescription(string? description)
     {
-        if (string.IsNullOrEmpty(description) || description.Length > 100)
+        if (string.IsNullOrEmpty(description?.Trim()) || description.Trim().Length > 100)
         {
             throw new ArgumentException("Description is invalid.");
         }

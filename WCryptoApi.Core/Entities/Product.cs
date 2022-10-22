@@ -14,7 +14,7 @@ public class Product
     {
         ValidateProductId(productId);
         ValidateCategoryId(categoryId);
-        ValidateCategoryId(categoryId);
+        ValidateDescription(description);
         ProductId   = productId;
         Description = description;
         CategoryId  = categoryId;
@@ -41,7 +41,7 @@ public class Product
 
     private static void ValidateDescription(string? description)
     {
-        if (string.IsNullOrEmpty(description) || description.Length > 100)
+        if (string.IsNullOrEmpty(description?.Trim()) || description.Trim().Length > 100)
         {
             throw new ArgumentException("Description is not valid.");
         }   
