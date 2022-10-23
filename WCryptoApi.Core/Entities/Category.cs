@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using WCryptoApi.Core.Dtos;
 using WCryptoApi.Core.Requests;
 

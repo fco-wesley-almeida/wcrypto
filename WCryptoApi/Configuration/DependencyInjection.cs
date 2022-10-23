@@ -1,4 +1,5 @@
 using WCryptoApi.Business.Services;
+using WCryptoApi.Business.Services.Category;
 using WCryptoApi.Core.Data.Category;
 using WCryptoApi.Core.Data.Product;
 using WCryptoApi.Core.Services.Category;
@@ -12,11 +13,11 @@ public class DependencyInjection
 {
     public static void Configure(IServiceCollection services)
     {
-        services.AddScoped<ICategoryListingService, CategoryService>();
-        services.AddScoped<ICategoryFinderService, CategoryService>();
-        services.AddScoped<ICategoryRegisterService, CategoryService>();
-        services.AddScoped<ICategoryUpdateService, CategoryService>();
-        services.AddScoped<ICategoryDeleteService, CategoryService>();
+        services.AddScoped<ICategoryListingService, CategoryListingService>();
+        services.AddScoped<ICategoryFinderService, CategoryFinderService>();
+        services.AddScoped<ICategoryRegisterService, CategoryRegisterService>();
+        services.AddScoped<ICategoryUpdateService, CategoryUpdateService>();
+        services.AddScoped<ICategoryDeleteService, CategoryDeleteService>();
         services.AddScoped<ICategoryListingDb, CategoryListingDb>();
         services.AddScoped<ICategoryFinderDb, CategoryFinderDb>();
         services.AddScoped<ICategoryRegisterDb, CategoryRegisterDb>();
