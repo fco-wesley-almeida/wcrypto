@@ -17,7 +17,7 @@ public class CategoryTest: UnitTestBase<Core.Entities.Category>
 
     [Theory]
     [MemberData(nameof(InvalidArgsForNormalConstructor))]
-    public void Build_Using_Normal_Constructor_With_Invalid_Args_Should_Fail(int categoryId, string description, int userId)
+    public void Constructor_WithInvalidArgs_ShouldThrowArgumentException(int categoryId, string description, int userId)
     {
         TestOutputHelper.WriteLine(@$"
             The category should not be created with params (
@@ -43,7 +43,7 @@ public class CategoryTest: UnitTestBase<Core.Entities.Category>
     
     [Theory]
     [MemberData(nameof(ValidArgsForNormalConstructor))]
-    public void Build_Using_Normal_Constructor_With_Valid_Args_Should_Pass(int categoryId, string description, int userId)
+    public void Constructor_WithValidArgs_ShouldPass(int categoryId, string description, int userId)
     {
         TestTarget = new Core.Entities.Category(categoryId, description, userId);
         TestOutputHelper.WriteLine($"The category object was created successfully: ({TestTarget})");
@@ -60,7 +60,7 @@ public class CategoryTest: UnitTestBase<Core.Entities.Category>
     
     [Theory]
     [MemberData(nameof(InvalidArgsForCategoryRequestConstructor))]
-    public void Build_Using_CategoryRequest_Constructor_With_Invalid_Args_Should_Fail(CategoryRequest categoryRequest)
+    public void ConstructorUsingCategoryRequest_WithInvalidArgs_ShouldThrowArgumentException(CategoryRequest categoryRequest)
     {
         TestOutputHelper.WriteLine(@$"
             The category should not be created with params (
@@ -82,7 +82,7 @@ public class CategoryTest: UnitTestBase<Core.Entities.Category>
     
     [Theory]
     [MemberData(nameof(ValidArgsForCategoryRequestConstructor))]
-    public void Build_Using_CategoryRequest_Constructor_With_Valid_Args_Should_Pass(CategoryRequest categoryRequest)
+    public void ConstructorUsingCategoryRequest_WithValidArgs_ShouldPass(CategoryRequest categoryRequest)
     {
         TestOutputHelper.WriteLine($"The category object was created successfully: ({TestTarget})");
         TestTarget = new Core.Entities.Category(categoryRequest);
@@ -121,7 +121,7 @@ public class CategoryTest: UnitTestBase<Core.Entities.Category>
     
     [Theory]
     [MemberData(nameof(InvalidArgsForCategoryDtoConstructor))]
-    public void Build_Using_CategoryDto_Constructor_With_Invalid_Args_Should_Fail(CategoryDto categoryDto)
+    public void ConstructorUsingCategoryDto_WithInvalidArgs_ShouldFail(CategoryDto categoryDto)
     {
         TestOutputHelper.WriteLine(@$"
             The category should not be created with params (
@@ -188,7 +188,7 @@ public class CategoryTest: UnitTestBase<Core.Entities.Category>
     
     [Theory]
     [MemberData(nameof(ValidArgsForCategoryDtoConstructor))]
-    public void Build_Using_CategoryDto_Constructor_With_Valid_Args_Should_Pass(CategoryDto categoryDto)
+    public void ConstructorUsingCategoryDto_WithValidArgs_ShouldPass(CategoryDto categoryDto)
     {
         TestTarget = new Core.Entities.Category(categoryDto);
         Assert.Equal(categoryDto.CategoryId, TestTarget.CategoryId);

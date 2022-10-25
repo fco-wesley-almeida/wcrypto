@@ -1,5 +1,6 @@
 using WCryptoApi.Business.Services;
 using WCryptoApi.Business.Services.Category;
+using WCryptoApi.Business.Services.Product;
 using WCryptoApi.Core.Data.Category;
 using WCryptoApi.Core.Data.Product;
 using WCryptoApi.Core.Services.Category;
@@ -24,11 +25,11 @@ public class DependencyInjection
         services.AddScoped<ICategoryUpdateDb, CategoryUpdateDb>();
         services.AddScoped<ICategoryDeleteDb, CategoryDeleteDb>();
         
-        services.AddScoped<IProductListingService, ProductService>();
-        services.AddScoped<IProductFinderService, ProductService>();
-        services.AddScoped<IProductRegisterService, ProductService>();
-        services.AddScoped<IProductUpdateService, ProductService>();
-        services.AddScoped<IProductDeleteService, ProductService>();
+        services.AddScoped<IProductListingService, ProductListingService>();
+        services.AddScoped<IProductFinderService, ProductFinderService>();
+        services.AddScoped<IProductRegisterService, ProductRegisterService>();
+        services.AddScoped<IProductUpdateService, ProductUpdateService>();
+        services.AddScoped<IProductDeleteService, ProductDeleteService>();
         services.AddScoped<IProductListingDb, ProductListingDb>();
         services.AddScoped<IProductFinderDb, ProductFinderDb>();
         services.AddScoped<IProductRegisterDb, ProductRegisterDb>();

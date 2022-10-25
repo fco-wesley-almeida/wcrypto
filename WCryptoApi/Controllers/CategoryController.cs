@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WCryptoApi.Core.Dtos;
 using WCryptoApi.Core.Entities;
 using WCryptoApi.Core.Exceptions;
 using WCryptoApi.Core.Requests;
@@ -29,7 +30,7 @@ public class CategoryController : Controller
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Category>>> Get()
+    public async Task<ActionResult<List<CategoryDto>>> Get()
     {
         try
         {
@@ -42,7 +43,7 @@ public class CategoryController : Controller
     }
     
     [HttpGet(template: "{categoryId:int}")]
-    public async Task<ActionResult<Category>> GetById(int categoryId)
+    public async Task<ActionResult<CategoryDto>> GetById(int categoryId)
     {
         try
         {
@@ -81,12 +82,11 @@ public class CategoryController : Controller
     }
     
     [HttpDelete(template: "{categoryId:int}")]
-    public async Task<ActionResult> Delete(int categoryId)
+    public async Task<ActionResult<CategoryDto>> Delete(int categoryId)
     {
         try
         {
-            await _categoryDeleteService.DeleteById(categoryId);
-            return Ok();
+            return Ok(await _categoryDeleteService.DeleteById(categoryId));
         }
         catch (HttpResponseException e)
         {

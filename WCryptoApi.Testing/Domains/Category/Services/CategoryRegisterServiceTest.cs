@@ -12,16 +12,16 @@ using WCryptoApi.Testing.Utils;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace WCryptoApi.Testing.Domains.Category;
+namespace WCryptoApi.Testing.Domains.Category.Services;
 
-public class CategoryUpdateServiceTest: UnitTestBase<CategoryUpdateService>
+public class CategoryRegisterServiceTest: UnitTestBase<CategoryRegisterService>
 {
-    public CategoryUpdateServiceTest(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
+    public CategoryRegisterServiceTest(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
     {
     }
 
     [Fact]
-    public async Task Update_WithValidParams_ShouldPass()
+    public async Task Register_WithValidParams_ShouldPass()
     {
         int categoryId = NumberMockUtil.RandomIntGt0();
         CategoryRequest categoryRequest = new()
@@ -29,8 +29,8 @@ public class CategoryUpdateServiceTest: UnitTestBase<CategoryUpdateService>
             Description = StringMockUtil.RandomString(100),
             UserId = NumberMockUtil.RandomIntGt0()
         };
-        TestTarget = new CategoryUpdateService(
-            categoryUpdateDb: MockCategoryUpdateDb(true), 
+        TestTarget = new CategoryRegisterService(
+            categoryRegisterDb: MockCategoryRegisterDb(categoryId), 
             categoryFinderService: MockCategoryFinderService(categoryId, categoryRequest)
         );
         Assert.Equal(
@@ -39,12 +39,12 @@ public class CategoryUpdateServiceTest: UnitTestBase<CategoryUpdateService>
                 description: categoryRequest.Description,
                 userId: categoryRequest.UserId
             )),
-            actual: JsonConvert.SerializeObject(await TestTarget.Update(categoryId, categoryRequest))
+            actual: JsonConvert.SerializeObject(await TestTarget.Register(categoryRequest))
         );
     }
     
     [Fact]
-    public async Task Update_WithInvalidParams_ShouldThrowArgumentException()
+    public async Task Register_WithInvalidParams_ShouldThrowArgumentException()
     {
         int categoryId = NumberMockUtil.RandomIntGt0();
         CategoryRequest categoryRequest = new()
@@ -52,15 +52,15 @@ public class CategoryUpdateServiceTest: UnitTestBase<CategoryUpdateService>
             Description = StringMockUtil.RandomString(101),
             UserId = NumberMockUtil.RandomIntGt0()
         };
-        TestTarget = new CategoryUpdateService(
-            categoryUpdateDb: MockCategoryUpdateDb(true), 
+        TestTarget = new CategoryRegisterService(
+            categoryRegisterDb: MockCategoryRegisterDb(categoryId), 
             categoryFinderService: MockCategoryFinderService(categoryId, categoryRequest)
         );
-        await Assert.ThrowsAsync<ArgumentException>(() => TestTarget.Update(categoryId, categoryRequest));
+        await Assert.ThrowsAsync<ArgumentException>(() => TestTarget.Register(categoryRequest));
     }
     
     [Fact]
-    public async Task Update_WithExceptionOnDatabaseLayer_ShouldThrowHttpBadRequestException()
+    public async Task Register_WithExceptionOnDatabaseLayer_ShouldThrowHttpBadRequestException()
     {
         int categoryId = NumberMockUtil.RandomIntGt0();
         CategoryRequest categoryRequest = new()
@@ -68,51 +68,35 @@ public class CategoryUpdateServiceTest: UnitTestBase<CategoryUpdateService>
             Description = StringMockUtil.RandomString(100),
             UserId = NumberMockUtil.RandomIntGt0()
         };
-        TestTarget = new CategoryUpdateService(
-            categoryUpdateDb: MockCategoryUpdateDbThrowingException(), 
+        TestTarget = new CategoryRegisterService(
+            categoryRegisterDb: MockCategoryRegisterDb(), 
             categoryFinderService: MockCategoryFinderService(categoryId, categoryRequest)
         );
-        await Assert.ThrowsAsync<HttpBadRequestException>(() => TestTarget.Update(categoryId, categoryRequest));
-    }
-    
-    [Fact]
-    public async Task Update_NonExistingRecord_ShouldThrowHttpBadRequestException()
-    {
-        int categoryId = NumberMockUtil.RandomIntGt0();
-        CategoryRequest categoryRequest = new()
-        {
-            Description = StringMockUtil.RandomString(100),
-            UserId = NumberMockUtil.RandomIntGt0()
-        };
-        TestTarget = new CategoryUpdateService(
-            categoryUpdateDb: MockCategoryUpdateDb(false), 
-            categoryFinderService: MockCategoryFinderService(categoryId, categoryRequest)
-        );
-        await Assert.ThrowsAsync<HttpBadRequestException>(() => TestTarget.Update(categoryId, categoryRequest));
+        await Assert.ThrowsAsync<HttpBadRequestException>(() => TestTarget.Register(categoryRequest));
     }
 
-    private ICategoryUpdateDb MockCategoryUpdateDb(bool result)
+    private ICategoryRegisterDb MockCategoryRegisterDb(int categoryId)
     {
-        Mock<ICategoryUpdateDb> categoryUpdateDbMock = new();
-        categoryUpdateDbMock
+        Mock<ICategoryRegisterDb> categoryRegisterDbMock = new();
+        categoryRegisterDbMock
            .Setup(c => 
-                c.Update(It.IsAny<Core.Entities.Category>())
+                c.Register(It.IsAny<Core.Entities.Category>())
             )
-           .ReturnsAsync(result)
+           .ReturnsAsync(categoryId)
         ;
-        return categoryUpdateDbMock.Object;
+        return categoryRegisterDbMock.Object;
     }
     
-    private ICategoryUpdateDb MockCategoryUpdateDbThrowingException()
+    private ICategoryRegisterDb MockCategoryRegisterDb()
     {
-        Mock<ICategoryUpdateDb> categoryUpdateDbMock = new();
-        categoryUpdateDbMock
+        Mock<ICategoryRegisterDb> categoryRegisterDbMock = new();
+        categoryRegisterDbMock
            .Setup(c => 
-                c.Update(It.IsAny<Core.Entities.Category>())
+                c.Register(It.IsAny<Core.Entities.Category>())
             )
            .Throws(new Exception())
         ;
-        return categoryUpdateDbMock.Object;
+        return categoryRegisterDbMock.Object;
     }
 
     private ICategoryFinderService MockCategoryFinderService(int categoryId, CategoryRequest category)

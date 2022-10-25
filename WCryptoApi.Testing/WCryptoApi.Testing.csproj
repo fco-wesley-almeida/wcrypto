@@ -30,8 +30,4 @@
       <ProjectReference Include="..\WCryptoApi\WCryptoApi.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Objects\Entities" />
-    </ItemGroup>
-
 </Project>

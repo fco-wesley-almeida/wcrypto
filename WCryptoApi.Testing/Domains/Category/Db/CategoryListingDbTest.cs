@@ -6,7 +6,7 @@ using WCryptoApi.Infrastructure.Dao.Category;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace WCryptoApi.Testing.Domains.Category;
+namespace WCryptoApi.Testing.Domains.Category.Db;
 
 public class CategoryListingDbTest: DatabaseTest<CategoryListingDb>
 {
@@ -15,7 +15,7 @@ public class CategoryListingDbTest: DatabaseTest<CategoryListingDb>
     }
 
     [Fact]
-    public async Task List_All_Non_Deleted_Records_Should_Pass()
+    public async Task FindAll_OnExistingRecords_ShouldReturnRecords()
     {
         await CreatePreConditionsForTesting();
         TestTarget = new CategoryListingDb();
@@ -25,7 +25,7 @@ public class CategoryListingDbTest: DatabaseTest<CategoryListingDb>
     }
     
     [Fact]
-    public async Task List_All_Non_Deleted_Records_Of_A_User_Should_Pass()
+    public async Task FindAllByUserId_WithExistingUser_ShouldReturnUserAssociateRecords()
     {
         await CreatePreConditionsForTesting();
         TestTarget = new CategoryListingDb();

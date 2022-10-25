@@ -1,12 +1,9 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using WCryptoApi.Core.Dtos;
 using WCryptoApi.Infrastructure.Dao.Category;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace WCryptoApi.Testing.Domains.Category;
+namespace WCryptoApi.Testing.Domains.Category.Db;
 
 public class CategoryDeleteDbTest: DatabaseTest<CategoryDeleteDb>
 {
@@ -15,7 +12,7 @@ public class CategoryDeleteDbTest: DatabaseTest<CategoryDeleteDb>
     }
 
     [Fact]
-    public async Task Delete_ExistingId_ShouldPass()
+    public async Task Delete_ExistingRecord_ShouldPass()
     {
         await CreatePreConditionsForTesting();
         TestTarget = new CategoryDeleteDb();
@@ -25,7 +22,7 @@ public class CategoryDeleteDbTest: DatabaseTest<CategoryDeleteDb>
     }
     
     [Fact]
-    public async Task Delete_NonExistingId_ShouldFail()
+    public async Task Delete_NonExistingRecord_ShouldFail()
     {
         await CreatePreConditionsForTesting();
         TestTarget = new CategoryDeleteDb();

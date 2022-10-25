@@ -1,13 +1,10 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using WCryptoApi.Core.Dtos;
 using WCryptoApi.Core.Requests;
 using WCryptoApi.Infrastructure.Dao.Category;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace WCryptoApi.Testing.Domains.Category;
+namespace WCryptoApi.Testing.Domains.Category.Db;
 
 public class CategoryRegisterDbTest: DatabaseTest<CategoryRegisterDb>
 {

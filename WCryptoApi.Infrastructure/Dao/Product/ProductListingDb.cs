@@ -7,13 +7,13 @@ namespace WCryptoApi.Infrastructure.Dao.Product;
 public class ProductListingDb: WCryptoDb, IProductListingDb
 {
 	private string? _sql;
-    public Task<IEnumerable<ProductDto>> FindAllByUserId(int userId)
+    public Task<IEnumerable<ProductDto>> FindAllByCategoryId(int categoryId)
     {
         return AssembleSql()
-              .ApplyUserIdFilter()
+              .ApplyCategoryIdFilter()
               .Connect()
               .QueryAsync<ProductDto>(_sql, new {
-                 UserId = userId
+                 CategoryId = categoryId
               })
 		;
     }
@@ -44,9 +44,9 @@ public class ProductListingDb: WCryptoDb, IProductListingDb
 	    return this;
     }
     
-    private ProductListingDb ApplyUserIdFilter()
+    private ProductListingDb ApplyCategoryIdFilter()
     {
-	    _sql += " and c.user_id = @UserId ";
+	    _sql += " and c.id = @CategoryId ";
 	    return this;
     }
 }

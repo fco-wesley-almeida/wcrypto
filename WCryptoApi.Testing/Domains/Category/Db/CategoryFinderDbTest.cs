@@ -1,12 +1,10 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WCryptoApi.Core.Dtos;
 using WCryptoApi.Infrastructure.Dao.Category;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace WCryptoApi.Testing.Domains.Category;
+namespace WCryptoApi.Testing.Domains.Category.Db;
 
 public class CategoryFinderDbTest: DatabaseTest<CategoryFinderDb>
 {
@@ -15,7 +13,7 @@ public class CategoryFinderDbTest: DatabaseTest<CategoryFinderDb>
     }
 
     [Fact]
-    public async Task FindById_ExistingId_ShouldReturn()
+    public async Task FindById_ExistingRecord_ShouldReturnRecord()
     {
         await CreatePreConditionsForTesting();
         TestTarget = new CategoryFinderDb();
@@ -26,7 +24,7 @@ public class CategoryFinderDbTest: DatabaseTest<CategoryFinderDb>
     }
     
     [Fact]
-    public async Task FindById_ExistingId_ShouldReturn_And_Id_Correspond()
+    public async Task FindById_ExistingRecord_ShouldReturnRecordAndIdCorrespond()
     {
         await CreatePreConditionsForTesting();
         TestTarget = new CategoryFinderDb();
@@ -37,7 +35,7 @@ public class CategoryFinderDbTest: DatabaseTest<CategoryFinderDb>
     }
     
     [Fact]
-    public async Task FindById_NonExistingId_ShouldNotReturn()
+    public async Task FindById_NonExistingRecord_ShouldReturnNull()
     {
         await CreatePreConditionsForTesting();
         TestTarget = new CategoryFinderDb();
@@ -48,7 +46,7 @@ public class CategoryFinderDbTest: DatabaseTest<CategoryFinderDb>
     }
     
     [Fact]
-    public async Task FindById_DeletedRecord_ShouldNotReturn()
+    public async Task FindById_DeletedRecord_ShouldReturnNull()
     {
         await CreatePreConditionsForTesting();
         TestTarget = new CategoryFinderDb();
